@@ -12,6 +12,8 @@ class BreweriesController < ApplicationController
   def show
   end
 
+  #http://stackoverflow.com/questions/11092807/installing-postgresql-on-ubuntu-for-ruby-on-rails
+
   # GET /breweries/new
   def new
     @brewery = Brewery.new
