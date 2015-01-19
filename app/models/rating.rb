@@ -6,8 +6,6 @@ class Rating < ActiveRecord::Base
   end
 
   def average_rating
-    score_sum = 0.0
-    beer.ratings.each {|rating| score_sum += rating.score}
-    score_sum / beer.ratings.count
+    beer.ratings.average(:score).to_f
   end
 end
