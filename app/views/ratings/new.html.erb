@@ -1,0 +1,13 @@
+<h1>Luo uusi arvostelu</h1>
+
+<%= form_for(@rating) do |f| %>
+    score
+    <%= f.number_field :score %>
+
+    beer_id
+    <%= f.number_field :beer_id %>
+
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+<% end %>

@@ -1,3 +1,13 @@
+<p id="notice"><%= notice %></p>
+
 <h2>List of ratings</h2>
 
-<p>To be completed...</p>
+<p>Number of ratings: <%= @ratings.count %></p>
+
+<ul>
+  <% @ratings.each do |rating| %>
+      <li> <%= rating %> </li>
+  <% end %>
+</ul>
+
+<%= link_to 'New Rating', new_rating_path %>
