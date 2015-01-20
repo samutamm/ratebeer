@@ -19,7 +19,7 @@
     beer has not yet been rated!
 <% else %>
     <p>Has <%= pluralize(@beer.ratings.count, 'rating','ratings')%>
-      , average <%= @beer.average_rating %></p>
+      , average <%= @beer.average_rating.round(1) %></p>
 <% end %>
 
 <%= link_to 'Edit', edit_beer_path(@beer) %> |
