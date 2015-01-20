@@ -1,13 +1,8 @@
-<h1>Luo uusi arvostelu</h1>
+<h1>Create new rating</h1>
 
 <%= form_for(@rating) do |f| %>
-    score
-    <%= f.number_field :score %>
+    <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :name) %>
+    score: <%= f.number_field :score %>
 
-    beer_id
-    <%= f.number_field :beer_id %>
-
-    <div class="actions">
-        <%= f.submit %>
-    </div>
+    <%= f.submit %>
 <% end %>
