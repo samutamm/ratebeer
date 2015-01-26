@@ -13,6 +13,7 @@ class RatingsController < ApplicationController
     rating = Rating.create params.require(:rating).permit(:score, :beer_id)
 
     # talletetaan tehdyn reittauksen sessioon
+
     session[:last_rating] = rating.to_s
 
     redirect_to ratings_path
