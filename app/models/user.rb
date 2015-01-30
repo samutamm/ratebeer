@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
 
   validates :username, uniqueness: true
   validates :username, length: { minimum: 5 }
+
+  def to_s
+    "#{self.username}"
+  end
 end

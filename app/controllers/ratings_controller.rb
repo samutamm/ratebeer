@@ -18,7 +18,7 @@ class RatingsController < ApplicationController
       render :new
     else
       current_user.ratings << @rating
-      redirect_to ratings_path
+      redirect_to current_user
     end
   end
 

@@ -1,22 +1,27 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @user.username %></h1>
+
+<p>has made
+<%= @user.ratings.count %>
+ratings with average of
+<%= @user.average_rating %>
+</p>
 <table>
   <thead>
   <tr>
-    <th>Username</th>
+    <th>Beer</th>
+    <th>Rating</th>
     <th colspan="3"></th>
-    <%= @user.username %>
-    has made
-    <%= @user.ratings.count %>
-    ratings with average of
-    <%= @user.average_rating %>
   </tr>
   </thead>
+
 
   <tbody>
   <% @user.ratings.each do |rating| %>
       <tr>
-        <td><%= rating.to_s %></td>
+        <td><%= rating.beer.name %></td>
+        <td><%= rating.score %></td>
         <td><%= link_to 'Delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
