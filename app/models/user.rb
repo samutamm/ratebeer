@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   has_many :ratings
 
   validates :username, uniqueness: true
-  validates :username, length: { minimum: 5 }
+  validates :username, length: { minimum: 3,
+                                 maximum: 15 }
 
   def to_s
     "#{self.username}"
