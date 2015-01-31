@@ -14,6 +14,28 @@
   <strong>City:</strong>
   <%= @beer_club.city %>
 </p>
+<p>
+<% if @beer_club.members.empty? %>
+    The club has not yet any members.
+<% else %>
 
-<%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
-<%= link_to 'Back', beer_clubs_path %>
+    <table>
+      <thead>
+      <tr>
+        <th>Members</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @beer_club.members.each do |member| %>
+          <tr>
+            <td><%= member.username %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+</p>
+
+      <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
+      <%= link_to 'Back', beer_clubs_path %>

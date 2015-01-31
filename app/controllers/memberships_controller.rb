@@ -8,6 +8,7 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.new params.require(:membership).permit(:beer_club_id)
 
+    current_user.memberships << @membership
     redirect_to current_user
   end
 

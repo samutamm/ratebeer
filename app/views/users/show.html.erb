@@ -7,6 +7,7 @@
 ratings with average of
 <%= @user.average_rating %>
 </p>
+<% if not @user.ratings.empty? %>
 <table>
   <thead>
   <tr>
@@ -15,7 +16,6 @@ ratings with average of
     <th colspan="3"></th>
   </tr>
   </thead>
-
 
   <tbody>
   <% @user.ratings.each do |rating| %>
@@ -27,6 +27,19 @@ ratings with average of
   <% end %>
   </tbody>
 </table>
+<% end %>
 
+<p>
+<% if @user.beer_clubs.empty? %>
+    <%= @user.username %> has not yet joined in any beer clubs.
+<% else %>
+    <h4>Beer Clubs</h4>
+    <p>
+      <% @user.beer_clubs.each do |club| %>
+          <%= link_to club.name, club %>
+      <% end %>
+    </p>
+<% end %>
+</p>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
