@@ -2,7 +2,9 @@ class MembershipsController < ApplicationController
 
   def new
     @membership = Membership.new
-    @beer_clubs = BeerClub.all
+
+    current_users_clubs = current_user.beer_clubs.to_set
+    @beer_clubs = BeerClub.all.to_set.delete_if {|x| current_users_clubs.include?(x)}
   end
 
   def create

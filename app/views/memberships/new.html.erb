@@ -1,6 +1,11 @@
 <h2>Join Beer Club</h2>
 
+<% if @beer_clubs.empty? %>
+    There is no clubs for you to join.
+    You either are member in every club or there is none clubs created.
+<% else %>
 <%= form_for(@membership) do |f| %>
     <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s) %>
     <%= f.submit %>
+<% end %>
 <% end %>
