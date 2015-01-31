@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :username, length: { minimum: 3,
                                  maximum: 15 }
+  validates_format_of :password, :with => /\A^(?=.*?[A-Z])(?=.*?[0-9]).{4,}$\Z/i
 
   def to_s
     "#{self.username}"
