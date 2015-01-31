@@ -35,7 +35,9 @@
           <tr>
             <td><%= rating.beer.name %></td>
             <td><%= rating.score %></td>
-            <td><%= link_to 'Delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% if @user == current_user %>
+                <td><%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
           </tr>
       <% end %>
       </tbody>
@@ -43,4 +45,5 @@
 <% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Destroy', user_path(@user), method: :delete if @user == current_user %>
 <%= link_to 'Back', users_path %>
