@@ -15,7 +15,7 @@ describe User do
   end
 
   describe "with a proper password" do
-    let(:user){ User.create username:"Pekka", password:"Secret1", password_confirmation:"Secret1" }
+    let(:user){ FactoryGirl.create(:user) }
 
     it "is saved" do
       expect(user).to be_valid
@@ -23,8 +23,8 @@ describe User do
     end
 
     it "and with two ratings, has the correct average rating" do
-      rating = Rating.new score:10
-      rating2 = Rating.new score:20
+      rating = FactoryGirl.create(:rating)
+      rating2 = FactoryGirl.create(:rating2)
 
       user.ratings << rating
       user.ratings << rating2
