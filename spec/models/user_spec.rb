@@ -65,22 +65,50 @@ describe User do
     end
 
     it "is the one with highest rating if several rated" do
-      create_beers_with_ratings(10, 20, 15, 7, 9, user)
+      create_beers_with_ratings([10, 20, 15, 7, 9], user)
       best = create_beer_with_rating(25, user)
 
       expect(user.favorite_beer).to eq(best)
     end
   end
+
+  describe "favorite style" do
+    let(:user){ FactoryGirl.create(:user)}
+    it "has method for detemining one " do
+      expect(user).to respond_to(:favorite_style)
+    end
+    it "without ratings does not have one" do
+      expect(user.favorite_style).to eq(nil)
+    end
+    it "is the only rated if only one rating" do
+      style = styles(1)
+      create_beer_with_rating(10, user, style)
+      expect(user.favorite_style).to eq(style)
+    end
+
+    it "is the one with highest rating average." do
+      style_1 = styles(0)
+      style_2 = styles(3)
+      create_beers_with_ratings([5, 10, 15], user, style_1)
+      create_beer_with_rating(30, user, style_2)
+
+      expect(user.favorite_style).to eq(style_2)
+    end
+  end
 end
 
-def create_beer_with_rating(score, user)
-  beer = FactoryGirl.create(:beer)
+def create_beer_with_rating(score, user, beer_style="Lager")
+  beer = FactoryGirl.create(:beer, style:beer_style)
   FactoryGirl.create(:rating, score:score, beer:beer, user:user)
   beer
 end
 
-def create_beers_with_ratings(*scores, user)
+def create_beers_with_ratings(scores, user, beer_style="Lager")
   scores.each do |score|
-    create_beer_with_rating(score, user)
+    create_beer_with_rating(score, user, beer_style)
   end
+end
+
+def styles(index)
+  ["Weizen", "Lager", "Pale ale", "IPA", "Porter"][index]
 end
