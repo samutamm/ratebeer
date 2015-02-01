@@ -15,14 +15,12 @@ class BeersController < ApplicationController
   # GET /beers/new
   def new
     @beer = Beer.new
-    @breweries = Brewery.all
-    set_styles
+    set_styles_and_breweries
   end
 
   # GET /beers/1/edit
   def edit
-    @breweries = Brewery.all
-    set_styles
+    set_styles_and_breweries
   end
 
   # POST /beers
@@ -37,8 +35,7 @@ class BeersController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @beer.errors, status: :unprocessable_entity }
-        set_styles
-        @breweries = Brewery.all
+        set_styles_and_breweries
       end
     end
   end
@@ -73,8 +70,9 @@ class BeersController < ApplicationController
       @beer = Beer.find(params[:id])
     end
 
-    def set_styles
+    def set_styles_and_breweries
       @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
+      @breweries = Brewery.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
