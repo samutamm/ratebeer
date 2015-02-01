@@ -95,6 +95,34 @@ describe User do
       expect(user.favorite_style).to eq(style_2)
     end
   end
+
+  describe "favorite brewery" do
+    let(:user){ FactoryGirl.create(:user)}
+    it "has method for detemining one " do
+      expect(user).to respond_to(:favorite_brewery)
+    end
+    it "without ratings does not have one" do
+      expect(user.favorite_brewery).to eq(nil)
+    end
+    it "is the only rated if only one rating" do
+      brewery = FactoryGirl.create(:brewery)
+      create_beer_to_brewery(brewery, 10, user)
+      expect(user.favorite_brewery).to eq(brewery)
+    end
+    it "is the one with highest rating average." do
+      b1 = FactoryGirl.create(:brewery)
+      b2 = FactoryGirl.create(:brewery2)
+      create_beer_to_brewery(b1, 10, user)
+      create_beer_to_brewery(b2, 20, user)
+      create_beer_to_brewery(b2, 4, user)
+      expect(user.favorite_brewery).to eq(b2)
+    end
+  end
+end
+
+def create_beer_to_brewery(brewery, score, user)
+  beer = FactoryGirl.create(:beer, brewery:brewery)
+  FactoryGirl.create(:rating, score:score, beer:beer, user:user)
 end
 
 def create_beer_with_rating(score, user, beer_style="Lager")
