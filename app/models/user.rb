@@ -16,4 +16,9 @@ class User < ActiveRecord::Base
   def to_s
     "#{self.username}"
   end
+
+  def favorite_beer
+    return nil if ratings.empty?
+    ratings.sort_by{ |r| r.score }.last.beer
+  end
 end
