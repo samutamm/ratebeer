@@ -33,7 +33,7 @@
       <tbody>
       <% @user.ratings.each do |rating| %>
           <tr>
-            <td><%= rating.beer.name %></td>
+            <td><%= link_to rating.beer.name, rating.beer %></td>
             <td><%= rating.score %></td>
             <% if @user == current_user %>
                 <td><%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -42,6 +42,8 @@
       <% end %>
       </tbody>
     </table>
+    <p>Favorite style: <%= @user.favorite_style %></p>
+    <p>Favorite brewery: <%= link_to @user.favorite_brewery.name, @user.favorite_brewery %></p>
 <% end %>
 
 <% if @user == current_user %>
