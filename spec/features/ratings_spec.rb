@@ -31,5 +31,13 @@ describe "Rating" do
       visit ratings_path
       expect(page).to have_content 'Number of ratings: 0'
     end
+
+    it 'when there are ratings, page should tell that.' do
+      beer = FactoryGirl.create(:beer, brewery:brewery)
+      FactoryGirl.create(:rating, score:10, beer:beer, user:user)
+
+      visit ratings_path
+      expect(page).to have_content 'Number of ratings: 1'
+    end
   end
 end
