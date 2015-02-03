@@ -3,6 +3,8 @@ require 'rails_helper'
 describe "New beer page" do
 
   before :each do
+    FactoryGirl.create(:user)
+    sign_in(username:"Pekka", password:"Foobar1")
     visit new_beer_path
   end
 

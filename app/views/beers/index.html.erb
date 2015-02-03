@@ -14,7 +14,6 @@
 
   <tbody>
     <% @beers.each do |beer| %>
-      <% if beer.brewery.nil? %>
       <tr>
         <td><%= link_to beer.to_s, beer %></td>
         <td><%= beer.style %></td>
@@ -27,6 +26,6 @@
 </table>
 
 <br>
+
 <%= link_to('New Beer', new_beer_path) if current_user %>
-<br>
-<%= link_to 'list of breweries', breweries_path %>
+
