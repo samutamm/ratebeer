@@ -71,3 +71,6 @@ def make_rating_to_user(user)
   FactoryGirl.create(:rating, score:10, beer:beer, user:user)
   beer
 end
+
+BeerClub
+BeerClubsController
