@@ -38,13 +38,27 @@ describe "User" do
   describe "user page" do
     it 'should list all made ratings' do
       user = User.first
-      beer = FactoryGirl.create(:beer)
-      FactoryGirl.create(:rating, score:10, beer:beer, user:user)
+      beer = make_rating_to_user(user)
 
       visit user_path(user)
-      save_and_open_page
       expect(page).to have_content beer.name
+    end
 
+    it 'deleting rating should remove it from database.' do
+      user = User.first
+      make_rating_to_user(user)
+      sign_in(username:"Pekka", password:"Foobar1")
+
+      visit user_path(user)
+      expect{
+        click_on('delete')
+      }.to change{Rating.count}.by(-1)
     end
   end
+end
+
+def make_rating_to_user(user)
+  beer = FactoryGirl.create(:beer)
+  FactoryGirl.create(:rating, score:10, beer:beer, user:user)
+  beer
 end
