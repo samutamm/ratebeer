@@ -1,5 +1,0 @@
-== README
-
-Oluiden arvosteluun tarkoitettu sovellus. 
-
-https://peaceful-tundra-4243.herokuapp.com/breweries
