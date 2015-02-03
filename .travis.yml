@@ -1,12 +1,15 @@
 language: ruby
 rvm:
- - 2.0.0
+- 2.0.0
 script:
- - bundle exec rake db:migrate --trace
- - RAILS_ENV=test bundle exec rake db:migrate --trace
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/
-
- deploy:
-   provider: heroku
-   api_key: "YOUR API KEY"
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: hL4GKTd+9PGkhZUZs1uyMoN7aNFHwqJW9AhR9oqU7HwbsX1Hic5EPu9kOD3wtexN2Zi5MpLIlZgDDL7+vi4u1pR/shW9osvAeCVjkd+4HFzIShT+f4LYZi2BIwaZzGi4BhyDNrOkl+Pov70zjF9F82khry3YV16rac8lcbEPcxo=
+  app: peaceful-tundra-4243
+  on:
+    repo: samutamm/ratebeer
