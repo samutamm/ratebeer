@@ -44,6 +44,15 @@ describe "User" do
       expect(page).to have_content beer.name
     end
 
+    it 'should list favorite style and brewery.' do
+      user = User.first
+      beer = make_rating_to_user(user)
+
+      visit user_path(user)
+      expect(page).to have_content 'Favorite style:'
+      expect(page).to have_content 'Favorite brewery:'
+    end
+
     it 'deleting rating should remove it from database.' do
       user = User.first
       make_rating_to_user(user)
