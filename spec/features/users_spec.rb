@@ -34,4 +34,17 @@ describe "User" do
       }.to change{User.count}.by(1)
     end
   end
+
+  describe "user page" do
+    it 'should list all made ratings' do
+      user = User.first
+      beer = FactoryGirl.create(:beer)
+      FactoryGirl.create(:rating, score:10, beer:beer, user:user)
+
+      visit user_path(user)
+      save_and_open_page
+      expect(page).to have_content beer.name
+
+    end
+  end
 end
