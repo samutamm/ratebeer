@@ -1,6 +1,16 @@
 {
   "RSpec": {
     "coverage": {
+      "/home/samutamm/WEB/RubyOnRails/ratebeer/app/models/beer_club.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
       "/home/samutamm/WEB/RubyOnRails/ratebeer/app/models/rating.rb": [
         1,
         1,
@@ -50,7 +60,7 @@
         1,
         null,
         1,
-        16,
+        17,
         15,
         null,
         null,
@@ -76,16 +86,6 @@
         1,
         null
       ],
-      "/home/samutamm/WEB/RubyOnRails/ratebeer/app/models/beer_club.rb": [
-        1,
-        1,
-        1,
-        null,
-        1,
-        0,
-        null,
-        null
-      ],
       "/home/samutamm/WEB/RubyOnRails/ratebeer/app/controllers/beer_clubs_controller.rb": [
         1,
         1,
@@ -94,7 +94,7 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
         null,
         null,
@@ -173,8 +173,8 @@
         1,
         null,
         1,
-        107,
-        81,
+        116,
+        89,
         null,
         null,
         1,
@@ -275,12 +275,12 @@
         null,
         null,
         1,
-        9,
+        10,
         null,
+        10,
         9,
-        8,
-        8,
-        8,
+        9,
+        9,
         null,
         1,
         null,
@@ -367,7 +367,7 @@
         1,
         null,
         1,
-        14,
+        15,
         null,
         null,
         null,
@@ -587,6 +587,6 @@
         null
       ]
     },
-    "timestamp": 1422995282
+    "timestamp": 1423079556
   }
 }

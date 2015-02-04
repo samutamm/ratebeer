@@ -6,6 +6,12 @@ FactoryGirl.define do
     password_confirmation "Foobar1"
   end
 
+  factory :beer_club, class: BeerClub do
+    name "olutklubi"
+    founded 1862
+    city "Toronto"
+  end
+
   factory :rating do
     score 10
   end
