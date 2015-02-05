@@ -8,24 +8,27 @@ describe "Beer club page" do
     visit beer_clubs_path
   end
 
-  it "should show all created BeerClubs" do
-    expect(page).to_not have_content 'Show'
-    expect(page).to_not have_content 'Delete'
+  it "should not show anything before creating BeerClubs" do
+    expect(page).to_not have_link 'Show'
+    expect(page).to_not have_link 'Delete'
   end
 
   it 'should list just created clubs.' do
     expect{
       FactoryGirl.create(:beer_club, name:"klubben")
       FactoryGirl.create(:beer_club, name:"buu")
-    }.to change{BeerClub.count}.from(0).to(2)
+    }.to change{BeerClub.count}.from(1).to(3)
 
     visit beer_clubs_path
     expect(page).to have_content 'buu'
     expect(page).to have_content 'klubben'
   end
 
+  before :each do
+    FactoryGirl.create(:beer_club, name:"klubb")
+  end
+
   it 'clicking show method should render clubs page.' do
-    FactoryGirl.create(:beer_club, name:"klubben")
     visit beer_clubs_path
 
     click_link('Show')
@@ -33,14 +36,23 @@ describe "Beer club page" do
   end
 
   it 'clicking show method should render clubs page.' do
-    FactoryGirl.create(:beer_club, name:"klubben")
     visit beer_clubs_path
-
     click_link('Edit')
     expect(page).to have_content 'Editing Beer'
     fill_in('beer_club_name', with:'Polololo')
     click_button('Update Beer club')
     expect(page).to have_content 'Polololo'
+  end
+
+  it 'delete feature destroys from database', :js => true do
+    sign_in(username:"Pekka", password:"Foobar1")
+    visit beer_clubs_path
+
+    expect{
+      click_link('Destroy')
+      page.driver.browser.switch_to.alert.accept
+    }.to change{BeerClub.count}.from(1).to(0)
+
   end
 
 end

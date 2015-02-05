@@ -14,6 +14,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'selenium-webdriver' #testit pyysivät itse tätä.
 end
 
 group :production do
