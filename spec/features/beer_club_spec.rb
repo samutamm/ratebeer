@@ -44,13 +44,12 @@ describe "Beer club page" do
     expect(page).to have_content 'Polololo'
   end
 
-  it 'delete feature destroys from database', :js => true do
+  it 'delete feature destroys from database', :js => false do
     sign_in(username:"Pekka", password:"Foobar1")
     visit beer_clubs_path
 
     expect{
       click_link('Destroy')
-      page.driver.browser.switch_to.alert.accept
     }.to change{BeerClub.count}.from(1).to(0)
 
   end
