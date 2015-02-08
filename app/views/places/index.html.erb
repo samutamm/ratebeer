@@ -4,3 +4,11 @@
     city <%= text_field_tag :city, params[:city] %>
     <%= submit_tag "Search" %>
 <% end %>
+
+<% if @places %>
+    <ul>
+      <% @places.each do |place| %>
+          <li><%=place.name %></li>
+      <% end %>
+    </ul>
+<% end %>
