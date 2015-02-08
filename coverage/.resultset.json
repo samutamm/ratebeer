@@ -55,14 +55,13 @@
         null,
         null
       ],
-      "/home/samutamm/WEB/RubyOnRails/ratebeer/app/models/concerns/rating_average.rb": [
+      "/home/samutamm/WEB/RubyOnRails/ratebeer/lib/rating_average.rb": [
         1,
         1,
         null,
         1,
         26,
         15,
-        null,
         null,
         null
       ],
@@ -587,6 +586,6 @@
         null
       ]
     },
-    "timestamp": 1423224136
+    "timestamp": 1423418041
   }
 }
