@@ -35,4 +35,13 @@ FactoryGirl.define do
     brewery
     style "Lager"
   end
+
+  factory :place, class: Place do
+    name "Oljenkorsi"
+    id 1
+  end
+  factory :place2, class: Place do
+    name "Weinsten"
+    id 2
+  end
 end
