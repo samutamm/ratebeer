@@ -172,7 +172,7 @@
         1,
         null,
         1,
-        242,
+        244,
         212,
         null,
         null,
@@ -551,6 +551,50 @@
         null,
         null
       ],
+      "/home/samutamm/WEB/RubyOnRails/ratebeer/app/models/place.rb": [
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        null,
+        null
+      ],
+      "/home/samutamm/WEB/RubyOnRails/ratebeer/lib/beermapping_api.rb": [
+        1,
+        1,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/home/samutamm/WEB/RubyOnRails/ratebeer/app/controllers/places_controller.rb": [
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        0,
+        null,
+        1,
+        null,
+        null,
+        null
+      ],
       "/home/samutamm/WEB/RubyOnRails/ratebeer/app/controllers/ratings_controller.rb": [
         1,
         1,
@@ -586,6 +630,6 @@
         null
       ]
     },
-    "timestamp": 1423418041
+    "timestamp": 1423418774
   }
 }
