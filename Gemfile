@@ -15,6 +15,7 @@ group :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'selenium-webdriver' #testit pyysivät itse tätä.
+  gem 'webmock'
 end
 
 group :production do
