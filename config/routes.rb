@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   get 'places', to: 'places#index'
   post 'places', to: 'places#search'
 
+  resources :places, only:[:index, :show]
+
+  post 'places', to:'places#search'
+
   root 'breweries#index'
 
   # get 'kaikki_bisset', :to => 'beers#index'
