@@ -11,10 +11,9 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs/1
   # GET /beer_clubs/1.json
   def show
-    if current_user
+    if current_user && (not @beer_club.members.include?(current_user))
       @membership = Membership.new
       @membership.user = current_user
-      @membership.beer_club = @beer_club
     end
   end
 
