@@ -11,6 +11,8 @@ class BeersController < ApplicationController
   # GET /beers/1
   # GET /beers/1.json
   def show
+    @rating = Rating.new
+    @rating.beer = @beer
   end
 
   # GET /beers/new
@@ -68,7 +70,7 @@ class BeersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_beer
-
+      @beer = Beer.find(params[:id])
     end
 
     def set_styles_and_breweries
