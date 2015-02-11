@@ -26,3 +26,5 @@ class BeermappingApi
     '3fe9417dccf6f093bfb739b6bc00ed7a'
   end
 end
+
+#"http://beermapping.com/webservice/loccity/3fe9417dccf6f093bfb739b6bc00ed7a/"
