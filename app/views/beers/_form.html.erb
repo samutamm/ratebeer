@@ -19,7 +19,7 @@
     Style:  <%= f.select :style, options_for_select(@styles, selected: @beer.style)%><br>
   </div>
   <div class="field">
-    Brewery <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name) %>
+    Brewery <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name, selected: @beer.brewery_id) %>
   </div>
   <div class="actions">
     <%= f.submit %>
