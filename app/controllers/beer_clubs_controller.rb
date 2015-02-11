@@ -13,7 +13,8 @@ class BeerClubsController < ApplicationController
   def show
     if current_user && (not @beer_club.members.include?(current_user))
       @membership = Membership.new
-      @membership.user = current_user
+      #@membership.user = current_user
+      @membership.beer_club = @beer_club
     end
   end
 
