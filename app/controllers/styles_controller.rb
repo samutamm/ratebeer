@@ -10,6 +10,7 @@ class StylesController < ApplicationController
   # GET /styles/1
   # GET /styles/1.json
   def show
+    @beers = Beer.all.map {|beer| beer if beer.style_id = @style.id }
   end
 
   # GET /styles/new
