@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
 
   private
   def ratings_for_style(style)
-    ratings.joins(:beer).where("beers.style = ?", style)
+    ratings.joins(:beer).where("beers.style_id = ?", style)
   end
 
   def ratings_for_brewery(brewery)
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     ratings.map { |rating| rating.score }.sum / ratings.count
   end
   def rated_styles
-    beers.select(:style).distinct.map { |beer| beer.style}
+    beers.select(:style_id).distinct.map { |beer| beer.style}
   end
   def rated_breweries
     beers.select(:brewery_id).distinct.map { |beer| beer.brewery_id}
