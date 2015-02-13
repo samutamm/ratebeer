@@ -60,7 +60,6 @@ describe User do
 
     it "is the only rated if only one rating" do
       beer = create_beer_with_rating(10, user)
-
       expect(user.favorite_beer).to eq(beer)
     end
 
@@ -125,18 +124,19 @@ def create_beer_to_brewery(brewery, score, user)
   FactoryGirl.create(:rating, score:score, beer:beer, user:user)
 end
 
-def create_beer_with_rating(score, user, beer_style="Lager")
+def create_beer_with_rating(score, user, beer_style=styles(1))
   beer = FactoryGirl.create(:beer, style:beer_style)
   FactoryGirl.create(:rating, score:score, beer:beer, user:user)
   beer
 end
 
-def create_beers_with_ratings(scores, user, beer_style="Lager")
+def create_beers_with_ratings(scores, user, beer_style=styles(1))
   scores.each do |score|
     create_beer_with_rating(score, user, beer_style)
   end
 end
 
 def styles(index)
-  ["Weizen", "Lager", "Pale ale", "IPA", "Porter"][index]
+  style_name = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"][index]
+  Style.create name:style_name, description:"blaablaa"
 end

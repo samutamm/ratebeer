@@ -10,7 +10,8 @@ class StylesController < ApplicationController
   # GET /styles/1
   # GET /styles/1.json
   def show
-    @beers = Beer.all.map {|beer| beer if beer.style_id = @style.id }
+    @beers = Beer.all.to_a.keep_if {|beer| beer.style_id == @style.id }
+    byebug
   end
 
   # GET /styles/new

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :styles, only: [:index, :new, :create, :destroy, :show]
+  resources :styles
 
   resources :beer_clubs
 

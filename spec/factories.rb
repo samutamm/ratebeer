@@ -6,6 +6,11 @@ FactoryGirl.define do
     password_confirmation "Foobar1"
   end
 
+  factory :style, class: Style do
+    name "Lager"
+    description "kuvaus"
+  end
+
   factory :beer_club, class: BeerClub do
     name "olutklubi"
     founded 1862
@@ -33,7 +38,7 @@ FactoryGirl.define do
   factory :beer do
     name "anonymous"
     brewery
-    style "Lager"
+    style
   end
 
   factory :place, class: Place do

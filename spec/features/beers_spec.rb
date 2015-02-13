@@ -16,7 +16,10 @@ describe "New beer page" do
   end
 
   it "creates new beer with valid name." do
+    FactoryGirl.create(:style)
+    visit new_beer_path
     fill_in('beer_name', with:"Kalja")
+    select "Lager", :from => 'beer_style_id'
 
     expect{
       click_button "Create Beer"
