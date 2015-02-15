@@ -1,15 +1,13 @@
 class BeerClubsController < ApplicationController
   before_action :set_beer_club, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_is_admin, only: [:destroy]
 
-  # GET /beer_clubs
-  # GET /beer_clubs.json
+
   def index
     @beer_clubs = BeerClub.all
   end
 
-  # GET /beer_clubs/1
-  # GET /beer_clubs/1.json
   def show
     if current_user
       if @beer_club.members.include?(current_user)
@@ -25,17 +23,13 @@ class BeerClubsController < ApplicationController
     end
   end
 
-  # GET /beer_clubs/new
   def new
     @beer_club = BeerClub.new
   end
 
-  # GET /beer_clubs/1/edit
   def edit
   end
 
-  # POST /beer_clubs
-  # POST /beer_clubs.json
   def create
     @beer_club = BeerClub.new(beer_club_params)
 
@@ -50,8 +44,6 @@ class BeerClubsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /beer_clubs/1
-  # PATCH/PUT /beer_clubs/1.json
   def update
     respond_to do |format|
       if @beer_club.update(beer_club_params)
@@ -64,8 +56,6 @@ class BeerClubsController < ApplicationController
     end
   end
 
-  # DELETE /beer_clubs/1
-  # DELETE /beer_clubs/1.json
   def destroy
     @beer_club.destroy
     respond_to do |format|
