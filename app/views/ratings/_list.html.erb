@@ -9,7 +9,7 @@
   <% elements.each do |elem| %>
       <tr>
         <td><%= link_to elem.to_s, elem %></td>
-        <td><%= elem.average_rating %></td>
+        <td><%= round(elem.average_rating) %></td>
         <td></td>
       </tr>
   <% end %>
