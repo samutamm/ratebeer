@@ -1,0 +1,8 @@
+<ul class="list-inline">
+  <% elements.each do |elem| %>
+      <li>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <%= link_to elem.to_s, elem %>
+      </li>
+  <% end %>
+</ul>

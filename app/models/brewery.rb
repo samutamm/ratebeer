@@ -12,6 +12,10 @@ class Brewery < ActiveRecord::Base
   scope :active, -> { where active:true }
   scope :retired, -> { where active:[nil,false] }
 
+  def to_s
+    "#{self.name}"
+  end
+
   def year_cannot_be_in_the_future
     if :year.present? && year > Time.now.year
       errors.add(:year, "can't be in the future.")

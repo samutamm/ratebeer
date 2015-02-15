@@ -1,13 +1,27 @@
-<p id="notice"><%= notice %></p>
+<h2>Ratings</h2>
 
-<h2>List of ratings</h2>
+<h3>Best rated breweries: </h3>
 
-<p>Number of ratings: <%= @ratings.count %></p>
+<%= render 'list', elements: @top_breweries %>
 
-<ul>
-  <% @ratings.each do |rating| %>
-      <li> <%= rating %> <%= link_to rating.user.to_s, rating.user %> </li>
-  <% end %>
-</ul>
+<br>
+
+<h3>Best rated beers: </h3>
+
+<%= render 'list', elements: @top_beers %>
+
+<br>
+
+<h3>Most active raters: </h3>
+
+<%= render 'list', elements: @top_raters %>
+
+<br>
+
+<h3>Recent ratings: </h3>
+
+<%= render 'list', elements: @recent %>
+
+<br>
 
 <%= link_to('New Rating', new_rating_path, class:'btn btn-primary') if current_user %>
