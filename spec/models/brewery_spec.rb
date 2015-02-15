@@ -27,4 +27,25 @@ describe Brewery do
       Brewery.first.destroy
     }.to change{Brewery.count}.from(1).to(0)
   end
+
+  it 'Class method top returns the only created one' do
+    b = FactoryGirl.create(:brewery)
+    expect(Brewery.top(1)).to eq([b])
+  end
+
+  it 'With three breweries returns the top 2' do
+    user = FactoryGirl.create(:user)
+    b1 = FactoryGirl.create(:brewery)
+    b2 = FactoryGirl.create(:brewery)
+    b3 = FactoryGirl.create(:brewery)
+    create_beer_to_brewery(b1, 10, user)
+    create_beer_to_brewery(b2, 20, user)
+    create_beer_to_brewery(b3, 30, user)
+    expect(Brewery.top(2)).to eq([b3, b2])
+  end
+end
+
+def create_beer_to_brewery(brewery, score, user)
+  beer = FactoryGirl.create(:beer, brewery:brewery)
+  FactoryGirl.create(:rating, score:score, beer:beer, user:user)
 end
