@@ -14,7 +14,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', require: false
-  gem 'selenium-webdriver' #testit pyysivät itse tätä.
+  gem 'selenium-webdriver'
   gem 'webmock'
 end
 
@@ -39,8 +39,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'httparty'
-gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+
+group :development do
+  gem 'rails_layout'
+end
 
 group :development, :test do
   gem 'byebug'
