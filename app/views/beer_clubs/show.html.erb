@@ -30,6 +30,7 @@
       <% @beer_club.members.each do |member| %>
           <tr>
             <td><%= member.username %></td>
+            <td><%= link_to 'Show', member, class:'btn btn-info' %></td>
           </tr>
       <% end %>
       </tbody>
@@ -39,11 +40,11 @@
 
 <% if current_user %>
     <% if @beer_club.members.include?(current_user) %>
-        <%= link_to 'end the membership', @membership, method: :delete %>
+        <%= link_to 'end the membership', @membership, method: :delete, class:'btn btn-danger' %>
     <% else %>
         <%= form_for(@membership) do |f| %>
             <%= f.hidden_field :beer_club_id %>
-            <%= f.submit value:"join the club" %>
+            <%= f.submit value:"join the club", class:'btn btn-success' %>
         <% end %>
     <% end %>
     <%= link_to 'Edit', edit_beer_club_path(@beer_club) %>

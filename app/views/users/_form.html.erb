@@ -10,12 +10,14 @@
           </ul>
         </div>
     <% end %>
+
     <% if @user.new_record? %>
         <div class="field">
           <%= f.label :username %><br>
           <%= f.text_field :username %>
         </div>
     <% end %>
+
     <div class="field">
       <% if @user.new_record? %>
           <%= f.label :password %><br />
@@ -29,6 +31,6 @@
       <%= f.password_field :password_confirmation  %>
     </div>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit class:'btn btn-success' %>
     </div>
 <% end %>
