@@ -35,8 +35,9 @@ describe "Beer club page" do
     expect(page).to have_content 'The club has not yet any members'
   end
 
-  it 'clicking show method should render clubs page.' do
+  it 'clubs page should have edit feature.' do
     visit beer_clubs_path
+    click_link('Show')
     click_link('Edit')
     expect(page).to have_content 'Editing Beer'
     fill_in('beer_club_name', with:'Polololo')
@@ -47,6 +48,7 @@ describe "Beer club page" do
   it 'delete feature destroys from database', :js => false do
     sign_in(username:"Pekka", password:"Foobar1")
     visit beer_clubs_path
+    click_link('Show')
 
     expect{
       click_link('Destroy')
