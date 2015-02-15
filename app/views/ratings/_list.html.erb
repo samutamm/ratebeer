@@ -1,8 +1,17 @@
-<ul class="list-inline">
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Average</th>
+  </tr>
+  </thead>
+  <tbody>
   <% elements.each do |elem| %>
-      <li>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <%= link_to elem.to_s, elem %>
-      </li>
+      <tr>
+        <td><%= link_to elem.to_s, elem %></td>
+        <td><%= elem.average_rating %></td>
+        <td></td>
+      </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
