@@ -3,11 +3,7 @@ Rails.application.routes.draw do
 
   resources :beer_clubs
 
-  resources :users
-
   resources :beers
-
-  resources :breweries
 
   resources :ratings, only: [:index, :new, :create, :destroy]
 
@@ -31,5 +27,7 @@ Rails.application.routes.draw do
   resources :breweries do
     post 'toggle_activity', on: :member
   end
-
+  resources :users do
+    post 'toggle_banned', on: :member
+  end
 end
