@@ -28,48 +28,33 @@ class User < ActiveRecord::Base
     ratings.sort_by{ |r| r.score }.last.beer
   end
 
-  def favorite_style
-    max = 0
-    favorite = nil
-    rated_styles.each do |style|
-      avg = avg_rating(ratings_for_style(style))
-      if max < avg
-        max = avg
-        favorite = style
-      end
+  def favorite(category)
+    return nil if ratings.empty?
+    category_ratings = rated(category).inject([]) do |set, item|
+      set << {
+          item: item,
+          rating: rating_of(category, item) }
     end
-    favorite
+
+    category_ratings.sort_by { |item| item[:rating] }.last[:item]
   end
 
   def favorite_brewery
-    max = 0
-    favorite = nil
-    rated_breweries.each do |brewery|
-      avg = avg_rating(ratings_for_brewery(brewery))
-      if max < avg
-        max = avg
-        favorite = brewery
-      end
+    favorite(:brewery)
+  end
+
+  def favorite_style
+    favorite(:style)
+  end
+
+  def rated(category)
+    ratings.map{ |r| r.beer.send(category) }.uniq
+  end
+
+  def rating_of(category, item)
+    ratings_of_item = ratings.select do |r|
+      r.beer.send(category) == item
     end
-    Brewery.find_by id: favorite
-  end
-
-  private
-  def ratings_for_style(style)
-    ratings.joins(:beer).where("beers.style_id = ?", style)
-  end
-
-  def ratings_for_brewery(brewery)
-    ratings.joins(:beer).where("beers.brewery_id = ?", brewery)
-  end
-
-  def avg_rating(ratings)
-    ratings.map { |rating| rating.score }.sum / ratings.count
-  end
-  def rated_styles
-    beers.select(:style_id).distinct.map { |beer| beer.style}
-  end
-  def rated_breweries
-    beers.select(:brewery_id).distinct.map { |beer| beer.brewery_id}
+    ratings_of_item.map(&:score).sum / ratings_of_item.count
   end
 end
