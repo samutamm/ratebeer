@@ -44,16 +44,4 @@ describe "Beer club page" do
     click_button('Update Beer club')
     expect(page).to have_content 'Polololo'
   end
-
-  it 'delete feature destroys from database', :js => false do
-    sign_in(username:"Pekka", password:"Foobar1")
-    visit beer_clubs_path
-    click_link('Show')
-
-    expect{
-      click_link('Destroy')
-    }.to change{BeerClub.count}.from(1).to(0)
-
-  end
-
 end

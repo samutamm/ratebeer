@@ -29,7 +29,8 @@ describe "Rating" do
   describe "listing all page" do
     it 'when no ratings, page should tell that.' do
       visit ratings_path
-      expect(page).to have_content 'Number of ratings: 0'
+      expect(page).to have_content '0.0'
+      expect(page).to have_content '0'
     end
 
     it 'when there are ratings, page should tell that.' do
@@ -37,7 +38,11 @@ describe "Rating" do
       FactoryGirl.create(:rating, score:10, beer:beer, user:user)
 
       visit ratings_path
-      expect(page).to have_content 'Number of ratings: 1'
+      expect(page).to have_content '1'
+      expect(page).to have_content 'Pekka'
+      expect(page).to have_content  beer.name
+      expect(page).to have_content  beer.style
+
     end
   end
 end
