@@ -14,7 +14,13 @@ class BreweriesController < ApplicationController
     @retired_breweries = case order
                           when 'name' then @retired_breweries.sort_by{ |b| b.name }
                           when 'year' then @retired_breweries.sort_by{ |b| b.year }
-                        end
+                         end
+
+    if session[:last_order_for_breweries] == order
+      @active_breweries.reverse!
+      @retired_breweries.reverse!
+    end
+    session[:last_order_for_breweries] = order
   end
 
   def show
