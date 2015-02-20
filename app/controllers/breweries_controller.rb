@@ -6,6 +6,15 @@ class BreweriesController < ApplicationController
   def index
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+    order = params[:order] || 'name'
+    @active_breweries = case order
+                          when 'name' then @active_breweries.sort_by{ |b| b.name }
+                          when 'year' then @active_breweries.sort_by{ |b| b.year }
+                        end
+    @retired_breweries = case order
+                          when 'name' then @retired_breweries.sort_by{ |b| b.name }
+                          when 'year' then @retired_breweries.sort_by{ |b| b.year }
+                        end
   end
 
   def show
