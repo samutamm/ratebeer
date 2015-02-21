@@ -16,6 +16,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'selenium-webdriver'
   gem 'webmock'
+  gem 'database_cleaner'
 end
 
 group :production do
