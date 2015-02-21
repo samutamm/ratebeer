@@ -23,6 +23,9 @@ class BreweriesController < ApplicationController
     session[:last_order_for_breweries] = order
   end
 
+  def list
+  end
+
   def show
   end
 
