@@ -32,6 +32,18 @@ describe "Beerlist page" do
 
   it "shows one known beer", js:true do
     visit beerlist_path
+    rivi = page.find('table').find('tr:nth-child(2)')
+    #byebug
     expect(page).to have_content "Nikolai"
+  end
+
+  it "shows beers in alphabetical order by name", js:true do
+    visit beerlist_path
+    rivi1 = page.find('table').find('tr:nth-child(2)').text
+    rivi2 = page.find('table').find('tr:nth-child(3)').text
+    rivi3 = page.find('table').find('tr:nth-child(4)').text
+    expect(rivi1).to have_content 'Fastenbier'
+    expect(rivi2).to have_content 'Lechte Weisse'
+    expect(rivi3).to have_content 'Nikolai'
   end
 end
