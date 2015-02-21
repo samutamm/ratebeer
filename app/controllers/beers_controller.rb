@@ -16,6 +16,9 @@ class BeersController < ApplicationController
              end
   end
 
+  def list
+  end
+
   def show
     @rating = Rating.new
     @rating.beer = @beer
