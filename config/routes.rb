@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     post 'toggle_banned', on: :member
   end
   resources :memberships, only: [:new, :create, :destroy] do
-    post 'confirm_membership', on: :member
+    post 'confirm', on: :member
   end
 
   get 'beerlist', to:'beers#list'

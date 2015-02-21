@@ -11,15 +11,13 @@ class BeerClubsController < ApplicationController
   def show
     if current_user
       if @beer_club.members.include?(current_user)
-        @beer_club.memberships.each do |m|
-          if m.user_id == current_user.id
-            @membership = m
-          end
-        end
+        @beer_club.memberships.find_by user_id: current_user.id
       else
         @membership = Membership.new
         @membership.beer_club = @beer_club
       end
+      @confirmed_members = User.joins(:memberships).where(memberships: {beer_club_id: @beer_club.id, confirmed: true})
+      @unconfirmed_members = User.joins(:memberships).where(memberships: {beer_club_id: @beer_club.id, confirmed: [false, nil]})
     end
   end
 

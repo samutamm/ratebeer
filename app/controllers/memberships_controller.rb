@@ -8,8 +8,8 @@ class MembershipsController < ApplicationController
   def show
   end
 
-  def confirm_membership
-    membership = Membership.find(params[:id])
+  def confirm
+    membership = Membership.find_by(beer_club_id: params[:beer_club_id], user_id: params[:user_id])
     membership.update_attribute(:confirmed, true)
 
     redirect_to :back, notice: "Membership confirmed!"

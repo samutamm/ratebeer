@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @beer_club.name %>
@@ -14,33 +12,27 @@
   <strong>City:</strong>
   <%= @beer_club.city %>
 </p>
+<h3>Members</h3>
 <p>
-<% if @beer_club.members.empty? %>
-    The club has not yet any members.
-<% else %>
+  <% @confirmed_members.each do |member| %>
+    <li><%= link_to member.username, member %></li>
+<% end %>
+</p>
 
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th>Members</th>
-        <th colspan="3"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @beer_club.members.each do |member| %>
-          <tr>
-            <td><%= member.username %></td>
-            <td><%= link_to 'Show', member, class:'btn btn-info' %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
+<h3>Outstanding applications</h3>
+<p>
+  <% @unconfirmed_members.each do |member| %>
+    <li><%= link_to member.username, member %> <%= link_to 'confirm', confirm_membership_path(user_id: member.id, beer_club_id: @beer_club.id), method: :post, class: 'btn btn-primary'%></li>
 <% end %>
 </p>
 
 <% if current_user %>
     <% if @beer_club.members.include?(current_user) %>
-        <%= link_to 'end the membership', @membership, method: :delete, class:'btn btn-danger' %>
+        <% if @beer_club.memberships.count <= 1 %>
+            <%= link_to 'end the membership and destroy the club', @membership, method: :delete, class:'btn btn-danger' %>
+        <% else %>
+            <%= link_to 'end the membership', @membership, method: :delete, class:'btn btn-danger' %>
+        <% end %>
     <% else %>
         <%= form_for(@membership) do |f| %>
             <%= f.hidden_field :beer_club_id %>
