@@ -11,7 +11,7 @@ class BeerClubsController < ApplicationController
   def show
     if current_user
       if @beer_club.members.include?(current_user)
-        @beer_club.memberships.find_by user_id: current_user.id
+        @membership = @beer_club.memberships.find_by user_id: current_user.id
       else
         @membership = Membership.new
         @membership.beer_club = @beer_club

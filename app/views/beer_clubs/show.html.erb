@@ -19,24 +19,25 @@
 <% end %>
 </p>
 
-<h3>Outstanding applications</h3>
-<p>
-  <% @unconfirmed_members.each do |member| %>
-    <li><%= link_to member.username, member %> <%= link_to 'confirm', confirm_membership_path(user_id: member.id, beer_club_id: @beer_club.id), method: :post, class: 'btn btn-primary'%></li>
-<% end %>
-</p>
-
 <% if current_user %>
-    <% if @beer_club.members.include?(current_user) %>
+    <% if @beer_club.members.include?(current_user) && @membership.confirmed %>
+
+        <h3>Outstanding applications</h3>
+        <p>
+          <% @unconfirmed_members.each do |member| %>
+            <li><%= link_to member.username, member %> <%= link_to 'confirm', confirm_membership_path(@membership.id), method: :post, class: 'btn btn-primary'%></li>
+        <% end %>
+        </p>
+
         <% if @beer_club.memberships.count <= 1 %>
             <%= link_to 'end the membership and destroy the club', @membership, method: :delete, class:'btn btn-danger' %>
         <% else %>
             <%= link_to 'end the membership', @membership, method: :delete, class:'btn btn-danger' %>
         <% end %>
     <% else %>
-        <%= form_for(@membership) do |f| %>
+        <%= form_for(@membership, method: :post) do |f| %>
             <%= f.hidden_field :beer_club_id %>
-            <%= f.submit value:"join the club", class:'btn btn-success' %>
+            <%= f.submit "join the club", class:'btn btn-success' %>
         <% end %>
     <% end %>
     <br>
