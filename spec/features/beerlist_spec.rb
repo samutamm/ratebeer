@@ -46,4 +46,12 @@ describe "Beerlist page" do
     expect(rivi2).to have_content 'Lechte Weisse'
     expect(rivi3).to have_content 'Nikolai'
   end
+
+  it "when clicking style, js sorts beers by style", js:true do
+    visit beerlist_path
+    click_link('style')
+    expect(page.find('table').find('tr:nth-child(2)').text).to have_content 'Lager'
+    expect(page.find('table').find('tr:nth-child(3)').text).to have_content 'Rauchbier'
+    expect(page.find('table').find('tr:nth-child(4)').text).to have_content 'Weizen'
+  end
 end
