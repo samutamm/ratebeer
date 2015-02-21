@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   end
 
   get 'beerlist', to:'beers#list'
+
+  get 'ngbeerlist', to:'beers#nglist'
 end
