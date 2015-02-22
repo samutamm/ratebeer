@@ -9,7 +9,7 @@ class MembershipsController < ApplicationController
   end
 
   def confirm
-    membership = Membership.find(params[:id])
+    membership = Membership.find_by(user_id: params[:user_id], beer_club_id: params[:beer_club_id])
     membership.update_attribute(:confirmed, true)
 
     redirect_to :back, notice: "Membership confirmed!"
@@ -31,7 +31,7 @@ class MembershipsController < ApplicationController
 
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to beer_club_path(@membership.beer_club_id), notice: current_user.username + ", welcome to the club!" }
+        format.html { redirect_to beer_club_path(@membership.beer_club_id), notice: current_user.username + ", your application needs to be confirmed by some member." }
         format.json { render :show, status: :created, location: @membership }
       else
         @beer_clubs = BeerClub.all.reject{ |b| b.members.include? current_user }

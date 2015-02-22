@@ -20,14 +20,15 @@
 </p>
 
 <% if current_user %>
-    <% if @beer_club.members.include?(current_user) && @membership.confirmed %>
-
-        <h3>Outstanding applications</h3>
-        <p>
-          <% @unconfirmed_members.each do |member| %>
-            <li><%= link_to member.username, member %> <%= link_to 'confirm', confirm_membership_path(@membership.id), method: :post, class: 'btn btn-primary'%></li>
+    <% if @beer_club.members.include?(current_user) %>
+        <% if @membership.confirmed %>
+            <h3>Outstanding applications</h3>
+            <p>
+              <% @unconfirmed_members.each do |member| %>
+                <li><%= link_to member.username, member %> <%= link_to 'confirm', confirm_membership_path(user_id: member.id, beer_club_id: @beer_club.id), method: :post, class: 'btn btn-primary'%></li>
+            <% end %>
+            </p>
         <% end %>
-        </p>
 
         <% if @beer_club.memberships.count <= 1 %>
             <%= link_to 'end the membership and destroy the club', @membership, method: :delete, class:'btn btn-danger' %>
