@@ -16,9 +16,9 @@ class BeerClubsController < ApplicationController
         @membership = Membership.new
         @membership.beer_club = @beer_club
       end
-      @unconfirmed_members = User.joins(:memberships).where(memberships: {beer_club_id: @beer_club.id, confirmed: [false, nil]})
+      @unconfirmed_members = BeerClub.unconfirmed_members
     end
-    @confirmed_members = User.joins(:memberships).where(memberships: {beer_club_id: @beer_club.id, confirmed: true})
+    @confirmed_members = BeerClub.confirmed_members
   end
 
   def new
