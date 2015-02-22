@@ -4,25 +4,33 @@
   <% end %>
 </h1>
 
-<p>has made
-  <%= @user.ratings.count %>
-  ratings with average of
-  <%= @user.average_rating %>
-</p>
+<% if not @user.ratings.empty? %>
+    <p>Favorite style: <%= @user.favorite_style %></p>
+    <p>Favorite brewery: <%= link_to @user.favorite_brewery.name, @user.favorite_brewery %></p>
+<% end %>
+
+<h3>Beer Clubs</h3>
 
 <p>
-  <% if @user.beer_clubs.empty? %>
-      <%= @user.username %> has not yet joined in any beer clubs.
-  <% else %>
-    <p>Beer Clubs:
-      <% @user.beer_clubs.each do |club| %>
-          <%= link_to club.name, club %>
-      <% end %>
-    </p>
-<% end %>
+<p><strong>member of</strong>
+  <% @user.beer_clubs.each do |club| %>
+      <%= link_to club.name, club %>
+  <% end %>
+</p>
+<p><strong>applied membership of</strong>
+  <% @user.applied_memberships.each do |club| %>
+      <%= link_to club.name, club %>
+  <% end %>
+</p>
 </p>
 
 <% if not @user.ratings.empty? %>
+    <h3>Ratings</h3>
+    <p>has made
+      <%= @user.ratings.count %>
+      ratings with average of
+      <%= @user.average_rating %>
+    </p>
     <table class="table table-hover">
       <thead>
       <tr>
@@ -44,8 +52,6 @@
       <% end %>
       </tbody>
     </table>
-    <p>Favorite style: <%= @user.favorite_style %></p>
-    <p>Favorite brewery: <%= link_to @user.favorite_brewery.name, @user.favorite_brewery %></p>
 <% end %>
 
 <% if current_user && current_user.admin && current_user != @user%>

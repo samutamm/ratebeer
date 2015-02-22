@@ -5,8 +5,12 @@ class User < ActiveRecord::Base
 
   has_many :ratings
   has_many :memberships
+  has_many :confirmed_memberships, -> {where confirmed: true}, class_name: "Membership"
+  has_many :unconfirmed_memberships, -> {where confirmed: [false, nil]}, class_name: "Membership"
+  has_many :beer_clubs, through: :confirmed_memberships, source: :beer_club
+  has_many :applied_memberships, through: :unconfirmed_memberships, source: :beer_club
+
   has_many :beers, through:  :ratings
-  has_many :beer_clubs, through: :memberships
   has_many :styles, through: :beers
 
   validates :username, uniqueness: true

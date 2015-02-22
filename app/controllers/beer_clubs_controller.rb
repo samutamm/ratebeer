@@ -16,9 +16,9 @@ class BeerClubsController < ApplicationController
         @membership = Membership.new
         @membership.beer_club = @beer_club
       end
-      @unconfirmed_members = BeerClub.unconfirmed_members
+      @unconfirmed_members = @beer_club.unconfirmed_members
     end
-    @confirmed_members = BeerClub.confirmed_members
+    @confirmed_members = @beer_club.confirmed_members
   end
 
   def new
