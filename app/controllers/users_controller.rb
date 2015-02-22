@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :ensure_that_is_admin, only: [:toggle_banned]
 
   def index
-    @users = User.all
+    @users = User.includes(:beers, :ratings).all
   end
 
   def show
