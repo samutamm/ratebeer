@@ -5,7 +5,7 @@ class BeersController < ApplicationController
 
 
   def index
-    @beers = Beer.all
+    @beers = Beer.includes(:brewery, :style).all
 
     order = params[:order] || 'name'
 
