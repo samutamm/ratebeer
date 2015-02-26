@@ -1,7 +1,17 @@
 
 <h1>Beers</h1>
 
-<% cache 'beerlist', skip_digest: true do %>
+<div style="border-style: solid;">
+  beerlist-name: <%= ActionController::Base.new.fragment_exist?( 'beerlist-name' ) %>
+  <br>
+  beerlist-style: <%= ActionController::Base.new.fragment_exist?( 'beerlist-style' ) %>
+  <br>
+  beerlist-brewery: <%= ActionController::Base.new.fragment_exist?( 'beerlist-brewery' ) %>
+  <br>
+  current: <%= "beerlist-#{@order}" %>
+</div>
+
+<% cache "beerlist-#{@order}", skip_digest: true do %>
 
     <table class="table table-hover">
       <thead>

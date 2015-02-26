@@ -5,26 +5,23 @@ class BeersController < ApplicationController
   before_action :skip_if_cached, only:[:index]
   before_action :expire_fragment_if_content_changed, only: [:create, :update, :destroy]
 
-  def skip_if_cached
-    return render :index if fragment_exist?( 'beerlist' )
-  end
-
   def expire_fragment_if_content_changed
-    expire_fragment('beerlist')
+    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
   end
 
+  def skip_if_cached
+    @order = params[:order] || 'name'
+    return render :index if fragment_exist?( "beerlist-#{@order}"  )
+  end
 
   def index
     @beers = Beer.includes(:brewery, :style).all
-    #@beers = Beer.all
 
-    order = params[:order] || 'name'
-
-    @beers = case order
-               when 'name' then @beers.sort_by{ |b| b.name }
-               when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
-               when 'style' then @beers.sort_by{ |b| b.style.name }
-             end
+    @beers = case @order
+      when 'name' then @beers.sort_by{ |b| b.name }
+      when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
+      when 'style' then @beers.sort_by{ |b| b.style.name }
+    end
   end
 
   def list
