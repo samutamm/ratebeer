@@ -2,7 +2,8 @@ class RatingsController < ApplicationController
   before_action :ensure_that_signed_in, except: [:index, :show]
 
   def index
-    @ratings = Rating.all
+    @ratings = Rating.includes(:beer, :user).all
+    #@ratings = Rating.all
     @top_beers = Beer.top(3)
     @top_breweries = Brewery.top(3)
     @top_raters = User.top(3)
@@ -12,7 +13,7 @@ class RatingsController < ApplicationController
 
   def new
     @rating = Rating.new
-    @beers = Beer.all
+    @beers = Beer.includes(:brewery).all
   end
 
   def create
