@@ -2,6 +2,16 @@ class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
   before_action :ensure_that_is_admin, only: [:destroy]
+  before_action :skip_if_cached, only: [:index]
+  before_action :expire_fragment_if_content_changed, only: [:update, :destroy, :create]
+
+  def expire_fragment_if_content_changed
+    expire_fragment('brewerylist')
+  end
+
+  def skip_if_cached
+    return render :index if fragment_exist?( 'brewerylist'  )
+  end
 
   def index
     @active_breweries = Brewery.active
