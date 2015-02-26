@@ -3,34 +3,34 @@ class BreweriesController < ApplicationController
   before_action :ensure_that_signed_in, except: [:index, :show]
   before_action :ensure_that_is_admin, only: [:destroy]
   before_action :skip_if_cached, only: [:index]
-  before_action :expire_fragment_if_content_changed, only: [:update, :destroy, :create]
+  before_action :expire_fragment_if_content_changed, only: [:update, :destroy, :create, :toggle_activity]
 
   def expire_fragment_if_content_changed
-    expire_fragment('brewerylist')
+    ["brewerylist-name", "brewerylist-year"].each { |f| expire_fragment(f) }
   end
 
   def skip_if_cached
-    return render :index if fragment_exist?( 'brewerylist'  )
+    @order = params[:order] || 'name'
+    return render :index if fragment_exist?( "brewerylist-#{@order}"  )
   end
 
   def index
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
-    order = params[:order] || 'name'
-    @active_breweries = case order
+    @active_breweries = case @order
                           when 'name' then @active_breweries.sort_by{ |b| b.name }
                           when 'year' then @active_breweries.sort_by{ |b| b.year }
                         end
-    @retired_breweries = case order
+    @retired_breweries = case @order
                           when 'name' then @retired_breweries.sort_by{ |b| b.name }
                           when 'year' then @retired_breweries.sort_by{ |b| b.year }
                          end
 
-    if session[:last_order_for_breweries] == order
+    if session[:last_order_for_breweries] == @order
       @active_breweries.reverse!
       @retired_breweries.reverse!
     end
-    session[:last_order_for_breweries] = order
+    session[:last_order_for_breweries] = @order
   end
 
   def list
