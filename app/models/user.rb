@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include RatingAverage
+  require 'securerandom'
 
   has_secure_password
 
@@ -60,5 +61,14 @@ class User < ActiveRecord::Base
       r.beer.send(category) == item
     end
     ratings_of_item.map(&:score).sum / ratings_of_item.count
+  end
+
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      user.provider = auth["provider"]
+      user.id = auth["uid"]
+      user.username = auth["info"]["nickname"]
+      user.password = SecureRandom.random_number(36**12).to_s(36).rjust(12, "0")
+    end
   end
 end

@@ -21,7 +21,7 @@ class RatingsController < ApplicationController
   end
 
   def index
-    calculate_stats_until_cache_is_ready  
+    calculate_stats_until_cache_is_ready
 =begin
     @ratings = Rating.includes(:beer, :user).all
     #@ratings = Rating.all

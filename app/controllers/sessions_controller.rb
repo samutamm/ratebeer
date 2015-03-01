@@ -24,4 +24,14 @@ class SessionsController < ApplicationController
     # uudelleenohjataan sovellus pääsivulle
     redirect_to :root
   end
+
+  def create_oauth
+    auth = env['omniauth.auth']
+    user = User.find_by provider: auth.provider, id: auth.uid
+    if user.nil?
+      user = User.create_with_omniauth(auth)
+    end
+    session[:user_id] = user.id
+    redirect_to user, :notice => "Signed in!"
+  end
 end
