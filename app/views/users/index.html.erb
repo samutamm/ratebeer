@@ -20,7 +20,7 @@
         <td><%= user.beers.size %></td>
         <td><%= user.ratings.size %></td>
         <td>
-          <% if current_user.admin and user.is_frozen? %>
+          <% if current_user and current_user.admin and user.is_frozen? %>
               <span class="label label-info">account frozen</span>
           <% end %>
         </td>
